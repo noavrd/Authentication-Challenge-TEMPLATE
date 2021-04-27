@@ -50,7 +50,6 @@ users.post("/login", async (req, res) => {
 
   try {
     const isPasswordCorrect = await compare(password, user.password);
-
     if (!isPasswordCorrect) {
       return res.status(403).send("User or Password incorrect");
     }
@@ -98,14 +97,14 @@ users.post("/token", (req, res) => {
     if (err) {
       return res.status(403).send("Invalid Refresh Token");
     }
-    const { name, email, isAdmin } = decoded;
-    const accessToken = jwt.sign(
-      { name, email, isAdmin },
-      ACCESS_TOKEN_SECRET,
-      {
-        expiresIn: "10s",
-      }
-    );
+    const user = {
+      name: decoded.name,
+      email: decoded.email,
+      isAdmin: decoded.isAdmin,
+    };
+    const accessToken = jwt.sign(user, ACCESS_TOKEN_SECRET, {
+      expiresIn: "10s",
+    });
 
     return res.json({ accessToken });
   });

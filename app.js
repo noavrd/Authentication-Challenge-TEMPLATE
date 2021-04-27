@@ -1,8 +1,8 @@
 const express = require("express");
 const api = require("./routes/api");
 const users = require("./routes/users");
-const { ACCESS_TOKEN_SECRET } = require("./env");
 const jwt = require("jsonwebtoken");
+const { ACCESS_TOKEN_SECRET } = require("./env");
 
 const app = express();
 
@@ -74,7 +74,7 @@ app.options("/", (req, res) => {
   }
   returnedOptions = Alloptions.filter((op, i) => returnedIndexes.includes(i));
 
-  res.set("Allow", "OPTIONS, GET, POST").json(returnedOptions);
+  res.set("Allow", "OPTIONS, GET, POST").status(200).json(returnedOptions);
 });
 
 module.exports = app;
