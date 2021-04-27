@@ -1,0 +1,4 @@
+const ACCESS_TOKEN_SECRET = "cyber4s";
+const REFRESH_TOKEN_SECRET = "Adva";
+
+module.exports={ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET}
